@@ -8,7 +8,13 @@ module bandpass_filter #(parameter DATA_WIDTH = 16)(
 )
 
 //Constants
-
+parameter A1 = 
+parameter A2 = 
+parameter A3 = 
+parameter A4 = 
+parameter B0 = 
+parameter B1 = 
+parameter B2 = 
 
 //Delay Lines
 reg [DATA_WIDTH-1:0] input_delay_line [0:4];
@@ -28,6 +34,7 @@ always @(posedge clk or negedge rst) begin
         end
         data_out <= 0;
         valid_out <= 0;
+        accumulator <= 0;
     end
     else if begin
         for (i = 4; i > 0 ; i = i - 1) begin 
