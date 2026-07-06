@@ -1,29 +1,134 @@
-# FPGA-Based-Heart-Rate-Monitoring-and-Arrhythmia-Detection
-This project focuses on FPGA-based implementation of a high- performance system designed for real-time QRS complex detection and heart rate analysis. The objective of this work is to design a reliable and resource-efficient hardware architecture for heart rate monitoring. 
+# FPGA-Based Heart Rate Monitor & Arrhythmia Detection
 
-<img src = "/Resources/Image1.png"></img>
+A real-time ECG processing system implemented in **Verilog** on an **FPGA**. The design detects heart rate, identifies abnormal heart rhythms, and displays the results with low latency. It is based on a modified Pan-Tompkins algorithm and was developed for the **Nexys 4 DDR (Artix-7)** FPGA board. 
 
-## Different Modules :
-Pre-Processing Stage: 
+---
 
-1. Bandpass Filter : It is used to filter out all the high frequency and low frequency noise while allowing only the required frequency band to be used for processing.
-2. Derivative Filter : It is used to detect the high slope regions which is necessary to identify a heart beat.
-3. Squaring : It amplifies large signals and attenuates the small signals. It basically amplifies the 
-4. Integrator :
-5. Low Pass Filter : 
+## Features
 
-QRS Detection Stage:
-1. Centered Derivative :
-2. Maximum Peak Detector :
-3. Adaptive Thresholding :
-4. Amplitude and Time Computation :
-5. Heart Rate Calculation :
-6. Arrhytmia Detection :
-7. Heart Rate Display : 
+* Real-time ECG processing
+* Heart rate (BPM) calculation
+* Arrhythmia detection
+* Modular Verilog implementation
+* FPGA-based hardware acceleration
+* Tested using MIT-BIH ECG data
 
-Bandpass filter 
-multiplier versus shift logic and its effect on hardware resource efficiency. how we store numbers 
+---
+
+## System Pipeline
+
+```text
+ECG Input
+    │
+    ▼
+Bandpass Filter
+    │
+Derivative Filter
+    │
+Squaring
+    │
+Moving Window Integrator
+    │
+Low Pass Filter
+    │
+Centered Derivative
+    │
+Peak Detection
+    │
+Adaptive Thresholding
+    │
+RR Interval & BPM
+    │
+    ▼
+Heart Rate + Arrhythmia Flag
+```
+
+---
+
+## Project Structure
+
+| Module                   | Purpose                                |
+| ------------------------ | -------------------------------------- |
+| Bandpass Filter          | Removes unwanted noise                 |
+| Derivative Filter        | Highlights QRS slopes                  |
+| Squaring                 | Makes peaks easier to detect           |
+| Moving Window Integrator | Forms a smooth QRS envelope            |
+| Low Pass Filter          | Reduces remaining ripple               |
+| Centered Derivative      | Finds peak locations accurately        |
+| Peak Detector            | Detects R-peaks                        |
+| Adaptive Thresholding    | Rejects false detections               |
+| RR Calculator            | Computes BPM and checks for arrhythmia |
 
 
-Derivative Filter 
-why are we using causal version of the transfer function and not as it is. 
+
+---
+
+## Hardware
+
+| Component       | Value                          |
+| --------------- | ------------------------------ |
+| FPGA            | Nexys 4 DDR (Artix-7 XC7A100T) |
+| Clock           | 100 MHz                        |
+| ECG Sample Rate | 360 Hz                         |
+| Data Format     | 16-bit Fixed Point (Q1.15)     |
+
+
+
+---
+
+## Results
+
+| Metric                |   Value |
+| --------------------- | ------: |
+| Heart Rate            |  73 BPM |
+| Detection Sensitivity |     96% |
+| Positive Predictivity |     96% |
+| Total LUT Usage       |   3.64% |
+| Power Consumption     | 0.134 W |
+
+
+
+---
+
+## Outputs
+
+* Heart Rate (7-segment display)
+* Arrhythmia status (LED)
+* Optional ECG waveform display (VGA)
+
+
+
+---
+
+## Technologies Used
+
+* Verilog HDL
+* Xilinx Vivado
+* Nexys 4 DDR FPGA
+* MIT-BIH Arrhythmia Database
+* Python (data conversion and visualization)
+
+ 
+
+---
+
+## Future Improvements
+
+* Support multiple ECG leads
+* Live ECG input using an ADC
+* ECG waveform display over VGA
+* Higher pipeline throughput
+* Arrhythmia classification using machine learning
+
+
+
+---
+
+## Authors
+
+* Arya Vishukumar Aimanianda
+* Partha Sarathi K N
+
+Department of Electronics and Communication Engineering
+National Institute of Technology Karnataka
+
